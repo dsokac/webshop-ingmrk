@@ -80,6 +80,17 @@ public class ProductControllerTests {
 	}
 	
 	@Test
+	public void should_throwException_when_requestingProductIdWhichIsNotStored() throws Exception {
+		when(mockedProductRepo.findById(99)).thenReturn(null);
+		
+		String targetData = "$.data";
+		String targetType = "$.type";
+		mockMvc.perform(get(PRODUCTS_API + "/99"))
+		.andExpect(jsonPath(targetType).value("error"))
+		.andExpect(jsonPath(targetData).value("ID '99' does not exist!"));
+	}
+	
+	@Test
 	public void should_getAccountById_when_validRequest() throws Exception {
 		
 		Product p1 = new Product();
@@ -504,7 +515,7 @@ public class ProductControllerTests {
 		p.setPriceHrk(new BigDecimal(12.76));
 		p.setDescription("Description.");
 		
-		when(mockedProductRepo.getOne(p.getId())).thenReturn(p);
+		when(mockedProductRepo.findById(1)).thenReturn(Optional.of(p));
 		
 		String target = "$.data";
 		mockMvc.perform(delete(PRODUCTS_API + "/1")

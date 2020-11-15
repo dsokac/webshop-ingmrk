@@ -31,7 +31,17 @@ public class ProductController {
 	
 	@GetMapping("/{id}")
 	public WebshopResponse getProductById(@PathVariable int id) {
-		return new WebshopResponse(productRepository.findById(id));
+		WebshopResponse response = null;
+		try {
+			Optional<Product> product = null;
+			if(ProductUtils.doesIdExist(id, productRepository)) {
+				product = productRepository.findById(id);
+				return new WebshopResponse(product.get());
+			}
+		} catch (Exception e) {
+			response = new WebshopErrorResponse(e.getMessage());
+		}
+		return response;
 	}
 	
 	@PostMapping("/create")
