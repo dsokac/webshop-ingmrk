@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,6 +31,7 @@ public class Customer {
 	@Column(nullable = false, length = 225)
 	private String email;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "customer")
 	private List<Order> orders = new ArrayList<>();
 	
