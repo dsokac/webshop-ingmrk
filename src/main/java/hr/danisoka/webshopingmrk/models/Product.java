@@ -25,13 +25,21 @@ public class Product {
 	private String name;
 	
 	@Column(name = "price_hrk", nullable = false, precision = 8, scale = 2)
-	private BigDecimal priceHrk;
+	private BigDecimal priceHrk = new BigDecimal(0);
 	
 	private String description;
 	
 	@Column(name = "is_available", nullable = false)
 	private Boolean available;
 
+	public void updateWith(Product newProduct) {
+		this.setAvailable(newProduct.getAvailable());
+		this.setCode(newProduct.getCode());
+		this.setDescription(newProduct.getDescription());
+		this.setName(newProduct.getName());
+		this.setPriceHrk(newProduct.getPriceHrk());
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
