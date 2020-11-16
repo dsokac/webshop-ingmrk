@@ -46,6 +46,13 @@ public class Customer {
 	public void addOrder(Order order) {
 		this.orders.add(order);
 	}
+	
+	public void updateWith(Customer newCustomer) {
+		this.setFirstName(newCustomer.getFirstName());
+		this.setLastName(newCustomer.getLastName());
+		this.setEmail(newCustomer.getEmail());
+		this.setOrders(newCustomer.getOrders());
+	}
 
 	@Override
 	public int hashCode() {
