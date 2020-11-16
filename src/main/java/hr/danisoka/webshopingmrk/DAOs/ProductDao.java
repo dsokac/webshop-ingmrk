@@ -22,7 +22,7 @@ public class ProductDao implements Dao<Product, Integer> {
 	
 	
 	@Override
-	public Optional<Product> getById(Integer id) {
+	public Optional<Product> getById(Integer id) throws IllegalArgumentException {
 		Optional<Product> product = null;
 		if(ProductUtils.doesIdExist(id, productRepository)) {
 			product = productRepository.findById(id);
@@ -40,7 +40,7 @@ public class ProductDao implements Dao<Product, Integer> {
 	}
 
 	@Override
-	public Product update(Product entity, Integer id) {
+	public Product update(Product entity, Integer id) throws IllegalArgumentException {
 		Product updated = null;
 		Optional<Product> old = null;
 		if(ProductUtils.doesIdExist(id, productRepository)) {
@@ -56,7 +56,7 @@ public class ProductDao implements Dao<Product, Integer> {
 	}
 
 	@Override
-	public Product deleteById(Integer id) {
+	public Product deleteById(Integer id) throws IllegalArgumentException {
 		Optional<Product> product = null;
 		if(ProductUtils.doesIdExist(id, productRepository)) {
 			product = productRepository.findById(id);
