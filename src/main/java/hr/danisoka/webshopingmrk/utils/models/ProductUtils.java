@@ -7,7 +7,7 @@ import hr.danisoka.webshopingmrk.utils.GenericUtils;
 public final class ProductUtils {
 	
 	public static boolean isCodeCorrect(String code) {
-		return code.length() == 10;
+		return code != null && code.length() == 10;
 	}	
 	
 	public static boolean doesIdExist(Integer id, ProductRepository productRepository) {
@@ -24,9 +24,7 @@ public final class ProductUtils {
 		return true;
 	}
 	
-	public static boolean validate(Product product, ProductRepository productRepository, boolean isUpdating) throws IllegalArgumentException {
-		boolean valid = true;
-		
+	public static boolean validate(Product product, ProductRepository productRepository, boolean isUpdating) throws IllegalArgumentException {		
 		if(product.getId() != null && !isUpdating) {
 			throw new IllegalArgumentException("The entity must not contain ID.");
 		} else if(product.getId() == null && isUpdating) {
@@ -43,6 +41,6 @@ public final class ProductUtils {
 			throw new IllegalArgumentException("The price must no be negative value.");
 		}
 		
-		return valid;
+		return true;
 	}
 }
