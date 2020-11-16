@@ -226,7 +226,7 @@ public final class ProductUtilsTests {
 	}
 	
 	@Test
-	public void validate_ProductPriceIsNegative_throwsException() {
+	public void validate_ProductPriceIsIncorrect_throwsException() {
 		Product p = new Product();
 		p.setCode("0000000001");
 		p.setName("Product 1");
@@ -236,19 +236,7 @@ public final class ProductUtilsTests {
 		
 		assertThrows(IllegalArgumentException.class, () -> ProductUtils.validate(p, mockedProductRepository, false), "The price must no be negative value.");
 	}
-	
-	@Test
-	public void validate_ProductPriceIsZero_returnsTrue() {
-		Product p = new Product();
-		p.setCode("0000000001");
-		p.setName("Product 1");
-		p.setAvailable(true);
-		p.setPriceHrk(new BigDecimal(0));
-		p.setDescription("Description.");
 		
-		assertTrue(ProductUtils.validate(p, mockedProductRepository, false));
-	}
-	
 	@Test
 	public void validate_ProductIsCorrectWhenUpdating_returnsTrue() {
 		Product p = new Product();
