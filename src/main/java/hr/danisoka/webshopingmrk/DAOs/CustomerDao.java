@@ -69,8 +69,7 @@ public class CustomerDao implements Dao<Customer, Integer>{
 
 	@Override
 	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
+		customerRepository.deleteAll();
 	}
 
 }
