@@ -40,6 +40,10 @@ public class Product {
 		this.setPriceHrk(newProduct.getPriceHrk());
 	}
 	
+	public boolean isEmpty() {
+		return this.id != null && (this.code == null || this.code.isBlank() || this.name == null || this.name.isBlank() || this.priceHrk.intValue() <= 0); 
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
