@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,10 +20,12 @@ public class OrderItem {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "order_id", nullable = false)
 	private Order order;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
@@ -35,6 +39,10 @@ public class OrderItem {
 		this.order = order;
 		this.product = product;
 		this.quantity = quantity;
+	}
+	
+	public void updateWith(int quantity) {
+		this.setQuantity(quantity);
 	}
 
 	@Override
