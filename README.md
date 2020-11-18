@@ -29,3 +29,6 @@ When the container is running the project will start correctly.
 
 ### (3) Project repository
 The source code is located in my repository. To access the code, clone the repository from the link: https://github.com/dsokac/webshop-ingmrk
+
+### (4) Postman (optional)
+The complete solution includes postman files to make REST API testing far more easier. To install postman, consult its website ( https://www.postman.com/ ). When the postman is installed, import files and make sure you change your Enviromental variable to "Ingemark Webshop Globals". 
