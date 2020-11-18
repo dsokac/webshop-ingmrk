@@ -10,8 +10,8 @@ docker pull dsokac/webshop-dbserver-ingemark
 Lombok is used to generate getters and setters. To ensure its correct functioning, it is necessary to do following steps.
 
 #### Setup Lombok
-To install lombok and apply it to your IDE, visit following link: https://projectlombok.org/setup/maven
-To setup Spring Tools Suite, visit following link: https://projectlombok.org/setup/eclipse
+- To install lombok and apply it to your IDE, visit following link: https://projectlombok.org/setup/maven
+- To setup Spring Tools Suite, visit following link: https://projectlombok.org/setup/eclipse
 
 #### Apply Lombok Annotations 
 In the case of missing getters and setters, you will need to do following:
