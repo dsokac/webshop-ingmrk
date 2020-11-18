@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+//API: https://api.hnb.hr/
 public class ExchangeRateResponse {
 	@Getter @Setter
 	@JsonProperty(value = "Broj tečajnice")
