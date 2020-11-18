@@ -3,9 +3,9 @@ The task for job application at a company Ingemark
 
 ## Instructions to run a project
 It is necessary to setup Lombok library and then to get docker image from using following command:
-'''
+```
 docker pull dsokac/webshop-dbserver-ingemark
-'''
+```
 ### Lombok
 Lombok is used to generate getters and setters. To ensure its correct functioning, it is necessary to do following steps.
 
