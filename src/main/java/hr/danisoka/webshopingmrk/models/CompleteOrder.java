@@ -26,7 +26,7 @@ public class CompleteOrder {
 		this.items.add(item);
 	}
 	
-	public void setItems(List<OrderItem> oiList) {
+	public void convertToLst(List<OrderItem> oiList) {
 		this.items.clear();
 		for(OrderItem el : oiList) {
 			Item item = new Item(el.getProduct(), el.getQuantity());

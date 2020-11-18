@@ -50,7 +50,7 @@ public class OrderDao {
 			order = orderRepository.findById(id);
 			co.setOrder(order.get());
 			List<OrderItem> items = orderItemDao.getAllByOrder(order.get());
-			co.setItems(items);
+			co.convertToLst(items);
 		}
 		return Optional.of(co);
 	}
@@ -69,28 +69,22 @@ public class OrderDao {
 
 	@Transactional
 	public CompleteOrder update(List<Item> items, Integer id) throws Exception {
-		CompleteOrder updated = null;
-		if(OrderUtils.doesIdExists(id, orderRepository)) {
-			Optional<Order> order = orderRepository.findById(id);
-			if(OrderUtils.validate(order.get(), true)) {
-				List<OrderItem> oiList = new ArrayList<OrderItem>();
-				for(Item item : items) {
-					Product p = item.getProduct();
-					if(p.isEmpty()) {
-						p = productDao.getById(p.getId()).get();
-					}
-					OrderItem oi = new OrderItem(order.get(), p, item.getQuantity()); 
-					if(item.getId() != null) {
-						oi.setId(item.getId());
-					}
-					oiList.add(oi);
-				}
-				List<OrderItem> stored = orderItemDao.saveAll(oiList);
-				updated = new CompleteOrder(order.get());
-				updated.setItems(stored);
+		CompleteOrder storedOrder = getById(id).get();
+		List<OrderItem> oiList = new ArrayList<OrderItem>();
+		for(Item item : items) {
+			Product p = item.getProduct();
+			if(p.isEmpty()) {
+				p = productDao.getById(p.getId()).get();
 			}
+			OrderItem oi = new OrderItem(storedOrder.getOrder(), p, item.getQuantity()); 
+			if(item.getId() != null) {
+				oi.setId(item.getId());
+			}
+			oiList.add(oi);
 		}
-		return updated;
+		List<OrderItem> stored = orderItemDao.saveAll(oiList);
+		storedOrder.convertToLst(stored);
+		return storedOrder;
 	}
 
 	@Transactional
@@ -101,7 +95,7 @@ public class OrderDao {
 			List<OrderItem> deletedItems = orderItemDao.deleteAllByOrder(order.get());
 			orderRepository.delete(order.get());
 			deleted = new CompleteOrder(order.get());
-			deleted.setItems(deletedItems);
+			deleted.convertToLst(deletedItems);
 		}
 		return deleted;
 	}
@@ -132,5 +126,4 @@ public class OrderDao {
 		} 
 		return completeOrder;
 	}
-
 }
