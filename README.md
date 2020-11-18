@@ -2,10 +2,8 @@
 The task for job application at a company Ingemark
 
 ## Instructions to run a project
-It is necessary to setup Lombok library and then to get docker image from using following command:
-```
-docker pull dsokac/webshop-dbserver-ingemark
-```
+It is necessary to setup Lombok library and Docker container.
+
 ### Lombok
 Lombok is used to generate getters and setters. To ensure its correct functioning, it is necessary to do following steps.
 
@@ -16,3 +14,14 @@ Lombok is used to generate getters and setters. To ensure its correct functionin
 #### Apply Lombok Annotations 
 In the case of missing getters and setters, you will need to do following:
 - Right click on root of the project and choose "Properties". Afterwards, navigate to the "Java Compiler" and then "Annotation Processing". Make sure that annotation processing is enabled. "Enable annotation processing" and "Enable processing in editor" should be ticked.
+
+### Docker container
+Get docker image from using following command:
+```
+docker pull dsokac/webshop-dbserver-ingemark
+```
+
+Run docker image as container using following command:
+```
+docker run --publish 5432:5432 --name webshop-dbserver-ingemark -d dsokac/webshop-dbserver-ingemark
+```
