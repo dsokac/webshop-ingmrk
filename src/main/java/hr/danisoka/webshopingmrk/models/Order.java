@@ -1,9 +1,12 @@
 package hr.danisoka.webshopingmrk.models;
 
 import java.math.BigDecimal;
+import java.sql.Types;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,9 +14,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import hr.danisoka.webshopingmrk.MyEnumConverter;
 import lombok.Getter;
 import lombok.Setter;
 
+@TypeDef(name = "MyEnumConverter", typeClass = MyEnumConverter.class)
 @Entity @Getter @Setter @Table(name = "orders")
 public class Order {
 
@@ -24,8 +32,9 @@ public class Order {
 	@JoinColumn(name = "customer_id", nullable = false)
 	private Customer customer;
 	
+	@Type(type = "MyEnumConverter")
 	@Column(nullable = false)
-	private String status = Status.DRAFT.toString();
+	private Status status = Status.DRAFT;
 	
 	@Column(name = "total_price_hrk", nullable = false, precision = 8, scale = 2)
 	private BigDecimal totalPriceHrk = new BigDecimal(0);
@@ -39,7 +48,7 @@ public class Order {
 		this.customer = customer;
 	}
 	
-	public enum Status {
+	/*public enum Status {
 		DRAFT("DRAFT"), SUBMITTED("SUBMITTED");
 		
 		private String statusName;
@@ -52,6 +61,9 @@ public class Order {
 			return statusName;
 		}
 		
+	}*/
+	public enum Status {
+		DRAFT, SUBMITTED;
 	}
 
 	@Override

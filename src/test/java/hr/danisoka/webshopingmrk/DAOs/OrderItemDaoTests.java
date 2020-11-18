@@ -2,6 +2,8 @@ package hr.danisoka.webshopingmrk.DAOs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -210,4 +212,34 @@ public class OrderItemDaoTests {
 	public void getAllByOrder_OrderIsNull_ThrowsException() {	
 		assertThrows(IllegalArgumentException.class, () -> orderItemDao.getAllByOrder(null), "Cannot get items for the order of value NULL.");
 	}
+/*	
+	@Test
+	public void saveAll_OneOrderItemIsIncorrect_ThrowsException() {
+		OrderItem oi1 = new OrderItem(o, p, 1);
+		OrderItem oi2 = new OrderItem(o, p2, 2);
+		oi1.setId(2);
+		OrderItem oi3 = new OrderItem(o, p2, 3);
+		List<OrderItem> oiList = new ArrayList<>();
+		oiList.addAll(Arrays.asList(oi1, oi2, oi3));
+
+		doReturn(true).when(OrderItemUtils.validate(oi1, mockedOrderItemRepository, false)).booleanValue();
+		doReturn(true).when(OrderItemUtils.validate(oi2, mockedOrderItemRepository, false)).booleanValue();
+		doThrow(new IllegalArgumentException()).when(OrderItemUtils.validate(oi3, mockedOrderItemRepository, false));
+				
+		assertThrows(IllegalArgumentException.class, () -> orderItemDao.saveAll(oiList));
+	}
+	
+	@Test
+	public void saveAll_AllOrderItemsAreCorrect_ReturnsSavedItems() {
+		OrderItem oi1 = new OrderItem(o, p, 1);
+		OrderItem oi2 = new OrderItem(o, p2, 2);
+		oi1.setId(2);
+		List<OrderItem> oiList = new ArrayList<>();
+		oiList.addAll(Arrays.asList(oi1, oi2));
+		
+		when(OrderItemUtils.validate(oi1, mockedOrderItemRepository, false)).thenReturn(true);
+		when(OrderItemUtils.validate(oi2, mockedOrderItemRepository, true)).thenReturn(true);
+		
+		assertEquals(oiList, orderItemDao.saveAll(oiList));
+	}*/
 }

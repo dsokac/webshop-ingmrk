@@ -53,6 +53,10 @@ public class Customer {
 		this.setEmail(newCustomer.getEmail());
 		this.setOrders(newCustomer.getOrders());
 	}
+	
+	public boolean isEmpty() {
+		return this.id != null && (this.email == null || this.email.isBlank() || this.firstName == null || this.firstName.isBlank() || this.lastName == null || this.lastName.isBlank());
+	}
 
 	@Override
 	public int hashCode() {

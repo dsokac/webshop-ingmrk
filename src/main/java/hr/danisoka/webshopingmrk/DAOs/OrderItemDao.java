@@ -86,5 +86,18 @@ public class OrderItemDao implements Dao<OrderItem, Integer> {
 			throw new IllegalArgumentException("Cannot get items for the order of value NULL.");
 		}
 	}
+	
+	public List<OrderItem> saveAll(List<OrderItem> items) {
+		for(OrderItem item : items) {
+			OrderItemUtils.validate(item, orderItemRepository, item.getId() != null);
+		}
+		return orderItemRepository.saveAll(items);
+	}
+	
+	public List<OrderItem> deleteAllByOrder(Order order) {
+		List<OrderItem> oi = getAllByOrder(order);
+		orderItemRepository.deleteAll(oi);
+		return oi;		
+	}
 		
 }
